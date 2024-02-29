@@ -29,6 +29,15 @@ class AdminController
     }
     public function getAccueilAdmin()
     {
-        require_once "views/accueilAdmin.view.php";
+        if (Securite::verifAccessSession()) {
+            require_once "views/accueilAdmin.view.php";
+        } else {
+            header('Location: ' . URL . "back/login");
+        };
+    }
+    public function deconnexion()
+    {
+        session_destroy();
+        header('Location: ' . URL . "back/login");
     }
 }
