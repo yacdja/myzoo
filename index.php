@@ -45,10 +45,14 @@ try {
                         throw new Exception("La page n'existe pas");
                 }
                 break;
+
             case "back":
                 switch ($url[1]) {
                     case "login":
                         $adminController->getPageLogin();
+                        break;
+                    case "connexion":
+                        $adminController->connexion();
                         break;
                     default:
                         throw new Exception("La page n'existe pas");
