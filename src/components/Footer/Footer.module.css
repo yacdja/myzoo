@@ -1,0 +1,6 @@
+.p_footerLink {
+  color: beige;
+}
+.p_footerLink:hover {
+  color: white;
+}
