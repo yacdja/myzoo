@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']));
 
 require_once "controllers/front/API.controller.php";
@@ -53,6 +55,9 @@ try {
                         break;
                     case "connexion":
                         $adminController->connexion();
+                        break;
+                    case "admin":
+                        $adminController->getAccueilAdmin();
                         break;
                     default:
                         throw new Exception("La page n'existe pas");

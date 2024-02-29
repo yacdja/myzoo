@@ -1,8 +1,14 @@
 <?php
+require "./controllers/back/Securite.class.php";
+require "./models/back/admin.manager.php";
+
+
 class AdminController
 {
-    public function _construct()
+    private $adminManager;
+    public function __construct()
     {
+        $this->adminManager = new AdminManager();
     }
     public function getPageLogin()
     {
@@ -13,6 +19,16 @@ class AdminController
         if (!empty($_POST['login']) && !empty($_POST['password'])) {
             $login = Securite::secureHTML($_POST['login']);
             $password = Securite::secureHTML($_POST['password']);
+            if ($this->adminManager->isConnexionValid($login, $password)) {
+                $_SESSION['access'] = "admin";
+                header('Location: ' . URL . "back/admin");
+            } else {
+                header('Location: ' . URL . "back/login");
+            };
         }
+    }
+    public function getAccueilAdmin()
+    {
+        require_once "views/accueilAdmin.view.php";
     }
 }
