@@ -12,6 +12,14 @@
     <?php require_once("views/commons/menu.php"); ?>
     <div class="container">
         <h1 class="rounded border border-dark m-2 p-2 text-center text-white bg-info"><?= $titre ?></h1>
+        <?php if (!empty($_SESSION['alert'])) : ?>
+            <div class="alert <?= $_SESSION['alert']['type'] ?>" role="alert">
+                <?= $_SESSION['alert']['message'] ?>
+            </div>
+
+        <?php
+            unset($_SESSION['alert']);
+        endif; ?>
         <?= $content ?>
     </div>
 
