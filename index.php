@@ -5,9 +5,14 @@ define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" :
 
 require_once "controllers/front/API.controller.php";
 require_once "controllers/back/admin.controller.php";
+require_once "controllers/back/familles.controller.php";
+
+
 
 $apiController = new APIController();
 $adminController = new AdminController();
+$famillesController = new FamillesController();
+
 
 try {
     if (empty($_GET['page'])) {
@@ -62,6 +67,18 @@ try {
                     case "deconnexion":
                         $adminController->deconnexion();
                         break;
+                    case "familles":
+                        switch ($url[2]) {
+                            case "visualisation":
+                                $famillesController->visualisation();
+                                break;
+                            case "creation":
+                                echo "creation";
+                                break;
+                            default:
+                                throw new Exception("La page n'existe pas");
+                        };
+                        break;
                     default:
                         throw new Exception("La page n'existe pas");
                 }
@@ -73,4 +90,5 @@ try {
 } catch (Exception $e) {
     $msg = $e->getMessage();
     echo $msg;
+    echo "<a href='" . URL . "back/login'>login</a>";
 }
