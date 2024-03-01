@@ -19,4 +19,13 @@ class FamillesController
             throw new Exception("vous n'avez pas le droit d'etre la !!!");
         }
     }
+
+    public function suppression()
+    {
+        if (Securite::verifAccessSession()) {
+            $this->famillesManager->deleteDBfamille((int)Securite::secureHTML($_POST['famille_id']));
+        } else {
+            throw new Exception("vous n'avez pas le droit d'etre la !!!");
+        }
+    }
 }

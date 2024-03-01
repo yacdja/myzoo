@@ -12,4 +12,12 @@ class FamillesManager extends Model
         $stmt->closeCursor();
         return $familles;
     }
+    public function deleteDBfamille($idFamille)
+    {
+        $req = "DELETE FROM famille WHERE famille_id = :idFamille";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue("idFamille", $idFamille, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->closeCursor();
+    }
 }
